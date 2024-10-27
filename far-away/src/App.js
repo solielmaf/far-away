@@ -3,6 +3,7 @@ import { useState } from "react";
 
 function App() {
   const [items, setItems] = useState([]);
+
   function handleAddItems(item) {
     setItems((items) => [...items, item]);
   }
@@ -25,7 +26,7 @@ function App() {
         onDelete={handelDelete}
         OnToggle={handleToggleItem}
       />
-      <Stats />
+      <Stats items={items} />
     </div>
   );
 }
@@ -95,10 +96,15 @@ function Item({ item, onDelete, OnToggle }) {
     </li>
   );
 }
-function Stats() {
+function Stats({ items }) {
+  const numItem = items.length;
+  const numpacked = items.filter((item) => item.packed).length;
   return (
     <footer className="stats">
-      <em>💼 You have x on your list, and you already packed x(%)</em>
+      <em>
+        💼 You have {numItem} items on your list, and you already packed{" "}
+        {numpacked}(%)
+      </em>
     </footer>
   );
 }
