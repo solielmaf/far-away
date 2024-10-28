@@ -18,7 +18,10 @@ function App() {
     );
   }
   function handleClear() {
-    setItems([]);
+    const confirmed = window.confirm(
+      "Are you sure you wnat to delete all items"
+    );
+    if (confirmed) setItems([]);
   }
   return (
     <div className="app">
@@ -122,11 +125,12 @@ function Item({ item, onDelete, OnToggle }) {
 function Stats({ items }) {
   const numItem = items.length;
   const numpacked = items.filter((item) => item.packed).length;
+  const percentPacked = Math.floor((100 * numpacked) / numItem);
   return (
     <footer className="stats">
       <em>
         💼 You have {numItem} items on your list, and you already packed{" "}
-        {numpacked}(%)
+        {numpacked}({percentPacked}%)
       </em>
     </footer>
   );
